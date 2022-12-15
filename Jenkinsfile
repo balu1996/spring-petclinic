@@ -16,5 +16,13 @@ pipeline {
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
+        stage('Image Build and Push to respository') {
+            steps {
+                script (
+                    withCredentials([file(credentialsId: 'cloud-cred', variable: 'docker-pass')]) {
+                docker build -t  asia.gcr.io/nodal-clock-342718/petclnc:blue . 
+                docker push  asia.gcr.io/nodal-clock-342718/petclnc:blue
+            } )
+        }
     }
 }
