@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petclinic-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: petclinicapp
+  template:
+    metadata:
+      labels:
+        app: petclinicapp
+    spec:
+      containers:
+      - name: mypetclinicapp
+        image: balumahendran.azurecr.io/balumahendran:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8099
