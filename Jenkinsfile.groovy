@@ -1,4 +1,4 @@
-//Jenkinsfile for Build and check codequality//
+//Jenkinsfile for Build and check codequality changes //
 pipeline { 
     tools {
         maven 'mymaven'
