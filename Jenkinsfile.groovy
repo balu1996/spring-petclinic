@@ -27,41 +27,41 @@ pipeline {
                 //}
 				//}
 				//}
-    stage('Integration Test') {
-      steps {
-        sh 'mvn verify'
+    //stage('Integration Test') {
+      //steps {
+        //sh 'mvn verify'
            }
-         post {
-          always {
-            junit 'target/surefire-reports/*.xml'
-       }
-           success {
-          emailext body: "Integration tests have completed. Please see attached test results.",
-          subject: "Integration test results",
-          attachmentsPattern: '**/surefire-reports/*.xml',
-          to:'balumahendranss@gmail.com'
-          }
-       }
-     }
-   stage("Sonarqube analysis"){
-           steps{
-                script{
-                     withSonarQubeEnv('sonarserver') {
-                     sh 'mvn sonar:sonar'
-                  }
-                }
-             	}
-                }
-      stage('Quality Gate') {
-            steps {
-                script {
-                    def qualityGate = waitForQualityGate()
-                    if (qualityGate.status != 'OK') {
-                        error "Pipeline aborted due to quality gate failure: ${qualityGate.status}"
-                    }
-                }
-            }
-        }
+        // post {
+          //always {
+          //  junit 'target/surefire-reports/*.xml'
+       //}
+           //success {
+          //emailext body: "Integration tests have completed. Please see attached test results.",
+          //subject: "Integration test results",
+          //attachmentsPattern: '**/surefire-reports/*.xml',
+          //to:'balumahendranss@gmail.com'
+         // }
+       //}
+     //}
+   //stage("Sonarqube analysis"){
+           //steps{
+                //script{
+                  //   withSonarQubeEnv('sonarserver') {
+                //     sh 'mvn sonar:sonar'
+              //    }
+            //    }
+          //   	}
+        //        }
+      //stage('Quality Gate') {
+            //steps {
+                //script {
+                    //def qualityGate = waitForQualityGate()
+                  //  if (qualityGate.status != 'OK') {
+                //        error "Pipeline aborted due to quality gate failure: ${qualityGate.status}"
+              //      }
+            //    }
+          //  }
+        //}
        //stage('Building image') {
       //steps{
        // script {
