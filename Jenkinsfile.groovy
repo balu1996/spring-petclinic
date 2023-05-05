@@ -18,15 +18,15 @@ pipeline {
             }
         }
 
-           stage('Build') {
-             steps {
-			 script {
+          // stage('Build') {
+            // steps {
+			// script {
 			     // echo 'export M2_HOME=/usr/share/maven' >> ~/.bashrc
 			     // sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
-			     sh 'mvn clean install'
-                }
-				}
-				}
+			     //sh 'mvn clean install'
+                //}
+				//}
+				//}
     stage('Integration Test') {
       steps {
         sh 'mvn verify'
