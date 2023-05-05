@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: petclinicapp
-        image: balumahendran.azurecr.io/balumahendran:latest
+        image: 190344882422.dkr.ecr.ap-south-1.amazonaws.com/hello:latest
         imagePullPolicy: Always
         
