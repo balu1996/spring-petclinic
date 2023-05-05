@@ -126,7 +126,8 @@ pipeline {
                   if(apply){
 
                     sh """
-                      kubectl apply -f .
+                      kubectl apply -f deployment.yaml
+                      kubectl apply -f service.yaml
                     """
                   }
                 }
