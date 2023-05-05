@@ -6,6 +6,10 @@ pipeline {
     agent any
  environment {
         registry = "190344882422.dkr.ecr.us-east-1.amazonaws.com/hello"
+         ACCESS_KEY = credentials('AWS_ACCESS_KEY_ID')
+        SECRET_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+         region ="ap-south-1"
+         cluster_name ="demo-cluster1"
     }
     stages {  
 		  stage('Cloning Git') {
@@ -77,6 +81,41 @@ pipeline {
          }
         }
       }
+     stage('Connect to EKS '){
+           steps{
+              script{
+
+                sh """
+                aws configure set aws_access_key_id "$ACCESS_KEY"
+                aws configure set aws_secret_access_key "$SECRET_KEY"
+                aws configure set region "$region"
+                aws eks --region "$region" update-kubeconfig --name "$cluster_name"
+                """
+            }
+        }
+        } 
+        stage('Deployment on EKS Cluster'){
+           steps{
+                script{
+                  
+                  def apply = false
+
+                  try{
+                    input message: 'please confirm to deploy on eks', ok: 'Ready to apply the config ?'
+                    apply = true
+                  }catch(err){
+                    apply= false
+                    currentBuild.result  = 'UNSTABLE'
+                  }
+                  if(apply){
+
+                    sh """
+                      kubectl apply -f .
+                    """
+                  }
+                }
+            }
+        }    
 }
 }
 
