@@ -74,6 +74,11 @@ pipeline {
     stage('Pushing to ECR') {
      steps{  
          script {
+                sh """
+                aws configure set aws_access_key_id "$ACCESS_KEY"
+                aws configure set aws_secret_access_key "$SECRET_KEY"
+                aws configure set region "$region"
+                """
                 sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin  190344882422.dkr.ecr.ap-south-1.amazonaws.com'
                 sh  'docker tag hello:latest 190344882422.dkr.ecr.ap-south-1.amazonaws.com/hello:latest'
                 sh 'docker push 190344882422.dkr.ecr.ap-south-1.amazonaws.com/hello:latest'
@@ -84,13 +89,8 @@ pipeline {
      stage('Connect to EKS '){
            steps{
               script{
-
-                sh """
-                aws configure set aws_access_key_id "$ACCESS_KEY"
-                aws configure set aws_secret_access_key "$SECRET_KEY"
-                aws configure set region "$region"
-                aws eks --region "$region" update-kubeconfig --name "$cluster_name"
-                """
+             sh  'aws eks --region "$region" update-kubeconfig --name "$cluster_name" '
+             
             }
         }
         } 
