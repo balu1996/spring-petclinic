@@ -79,8 +79,8 @@ pipeline {
                 aws configure set aws_secret_access_key "$SECRET_KEY"
                 aws configure set region "$region"
                 """
-                sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin  "registry" '
-                sh  'docker tag hello:latest "registry":latest'
+                sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin  "$registry" '
+                sh  'docker tag hello:latest "$registry":latest'
                 sh 'docker push 190344882422.dkr.ecr.ap-south-1.amazonaws.com/hello:latest'
 
          }
