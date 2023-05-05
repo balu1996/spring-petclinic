@@ -23,7 +23,7 @@ pipeline {
 			 script {
 			    // echo 'export M2_HOME=/usr/share/maven' >> ~/.bashrc
 			    //sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
-			    sh 'mvn clean package'
+			    sh 'mvn clean install'
                 }
 				}
 				}
