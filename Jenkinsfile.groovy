@@ -5,7 +5,7 @@ pipeline {
     }
     agent any
  environment {
-        registry = "190344882422.dkr.ecr.ap-south-1.amazonaws.com/hello"
+        registry = "190344882422.dkr.ecr.ap-south-1.amazonaws.com"
          ACCESS_KEY = credentials('AWS_ACCESS_KEY_ID')
         SECRET_KEY = credentials('AWS_SECRET_ACCESS_KEY')
          region ="ap-south-1"
@@ -80,7 +80,7 @@ pipeline {
                 aws configure set region "$region"
                 """
                 sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin  "$registry" '
-                sh  'docker tag hello:latest "$registry":latest'
+                sh  'docker tag hello:latest "$registry"/hello:latest'
                 sh 'docker push 190344882422.dkr.ecr.ap-south-1.amazonaws.com/hello:latest'
 
          }
