@@ -25,8 +25,8 @@ pipeline {
 			    //sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
 			  //  sh 'mvn clean install'
                 //}
-				}
-				}
+				//}
+				//}
 	 // stage('Integration Test') {
       //steps {
        // sh 'mvn verify'
@@ -132,6 +132,7 @@ pipeline {
                 }
             }
         }    
-
+    }
+}
 
 
