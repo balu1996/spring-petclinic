@@ -71,22 +71,22 @@ pipeline {
     //}
    
      //Uploading Docker images into AWS ECR
-     stage('Building and Pushing to ECR') {
-     steps{  
-         script {
-                sh """
-                  aws configure set aws_access_key_id "$ACCESS_KEY"
-                  aws configure set aws_secret_access_key "$SECRET_KEY"
-                  aws configure set region "$region"
-                   """
-                  sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin  "$registry" '
-                  sh 'docker build -t hello . '
-                  sh  'docker tag hello:latest 190344882422.dkr.ecr.ap-south-1.amazonaws.com/hello:latest'
-                  sh 'docker push 190344882422.dkr.ecr.ap-south-1.amazonaws.com/hello:latest'
+     //stage('Building and Pushing to ECR') {
+     //steps{  
+        // script {
+               // sh """
+                //  aws configure set aws_access_key_id "$ACCESS_KEY"
+                 // aws configure set aws_secret_access_key "$SECRET_KEY"
+                  // aws configure set region "$region"
+                   //"""
+                  //sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin  "$registry" '
+                  //sh 'docker build -t hello . '
+                  //sh  'docker tag hello:latest 190344882422.dkr.ecr.ap-south-1.amazonaws.com/hello:latest'
+                  //sh 'docker push 190344882422.dkr.ecr.ap-south-1.amazonaws.com/hello:latest'
 
-         }
-        }
-     }
+         //}
+       // }
+     //}
       
     }
 }
