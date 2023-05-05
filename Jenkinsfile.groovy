@@ -80,7 +80,7 @@ pipeline {
                 aws configure set region "$region"
                 """
                 sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin  "$registry" '
-                sh  'docker tag hello:latest "$registry"/hello:latest'
+                sh  'docker tag hello:latest 190344882422.dkr.ecr.ap-south-1.amazonaws.com/hello:latest'
                 sh 'docker push 190344882422.dkr.ecr.ap-south-1.amazonaws.com/hello:latest'
 
          }
