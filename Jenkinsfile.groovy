@@ -70,7 +70,7 @@ pipeline {
       //}
     //}
    
-     Uploading Docker images into AWS ECR
+     //Uploading Docker images into AWS ECR
      stage('Building and Pushing to ECR') {
      steps{  
          script {
